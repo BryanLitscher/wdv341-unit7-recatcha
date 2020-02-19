@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    #$recaptcha_secret = '6LcWANoUAAAAACAbYU-gRXWOH_Ux10IHVYtjXkAS';
     $recaptcha_secret = $reCaptchaSecretkey;
     $recaptcha_response = $_POST['recaptcha_response'];
 
@@ -55,11 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>WDV341 Intro PHP - Self Posting Form</title>
 
-    <!--<script src="https://www.google.com/recaptcha/api.js?render=6LcWANoUAAAAAKhK4-B7phMxY6UFBZ9ujfuQFxGo"></script> -->
     <script src="https://www.google.com/recaptcha/api.js?render=<?php echo  $reCaptchaSiteKey; ?>"></script>
     <script>
         grecaptcha.ready(function () {
-            //grecaptcha.execute('6LcWANoUAAAAAKhK4-B7phMxY6UFBZ9ujfuQFxGo', { action: 'contact' }).then(function (token) {
             grecaptcha.execute(<?php echo "'" . $reCaptchaSiteKey . "'" ; ?>, { action: 'contact' }).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
